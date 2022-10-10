@@ -101,6 +101,8 @@ namespace AppPessoa3
                 txtCelular.Text = pessoa.celular;
                 txtDataNascimento.Text = pessoa.data_nascimento;
                 txtEmail.Text = pessoa.email;
+                btnAtualizar.Enabled = true;
+                btnExcluir.Enabled = true;
             }
         }
     }
