@@ -82,5 +82,26 @@ namespace AppPessoa3
                 MessageBox.Show(er.Message);
             }
         }
+
+        private void btnLocalizar_Click(object sender, EventArgs e)
+        {
+            if (txtId.Text == "")
+            {
+                MessageBox.Show("Por favor, digite um ID.");
+                this.txtId.Focus();
+            }
+            else
+            {
+                int Id = Convert.ToInt32(txtId.Text.Trim());
+                Pessoa pessoa = new Pessoa();
+                pessoa.Localizar(Id);
+                txtNome.Text = pessoa.nome;
+                txtCidade.Text = pessoa.cidade;
+                txtEndereco.Text = pessoa.endereco;
+                txtCelular.Text = pessoa.celular;
+                txtDataNascimento.Text = pessoa.data_nascimento;
+                txtEmail.Text = pessoa.email;
+            }
+        }
     }
 }
