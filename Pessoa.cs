@@ -88,5 +88,31 @@ namespace AppPessoa3
             dr.Close();
             con.Close();
         }
+
+        public bool RegistroRepetido(string nome, string celular, string email)
+        {
+            string sql = "SELECT * FROM Pessoa WHERE nome='" + nome + "' AND celular='" + celular + "' AND email='" + email + "'";
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
+            var result = cmd.ExecuteScalar();
+            if(result != null)
+            {
+                return (int)result > 0;
+            }
+            con.Close();
+            return false;
+        }
     }
 }
+// Script do banco de dados
+// CREATE TABLE[dbo].[Pessoa] 
+//(
+//[Id] INT IDENTITY(1, 1) NOT NULL,
+//[nome] NCHAR(180) NULL, 
+// [cidade] NCHAR(180) NULL, 
+// [endereco] NCHAR(180) NULL, 
+// [data_nascimento] NCHAR(30) NULL, 
+// [celular] NCHAR(30) NULL, 
+// [email] NCHAR(180) NULL
+//)

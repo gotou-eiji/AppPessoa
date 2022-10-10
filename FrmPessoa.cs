@@ -16,5 +16,71 @@ namespace AppPessoa3
         {
             InitializeComponent();
         }
+
+        private void FrmPessoa_Load(object sender, EventArgs e)
+        {
+            Pessoa pessoa = new Pessoa();
+            List<Pessoa> pessoas = pessoa.listapessoas();
+            dgvPessoa.DataSource = pessoas;
+            btnAtualizar.Enabled = false;
+            btnExcluir.Enabled = false;
+        }
+
+        private void btnFechar_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog = new DialogResult();
+            dialog = MessageBox.Show("Deseja realmente sair do aplicativo?", "Fechar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(dialog == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void btnInserir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtNome.Text == "" && txtCidade.Text == "" && txtEndereco.Text == "")
+                {
+                    MessageBox.Show("Por favor, preencha o formulário para inserir.");
+                    this.txtNome.Focus();
+                }
+                else
+                {
+                    Pessoa pessoa = new Pessoa();
+                    if (pessoa.RegistroRepetido(txtNome.Text,txtCelular.Text,txtEmail.Text) != false)
+                    {
+                        MessageBox.Show("Este cliente já está em nossa base de dados!");
+                        List<Pessoa> pessoas = pessoa.listapessoas();
+                        dgvPessoa.DataSource = pessoas;
+                        txtNome.Text = "";
+                        txtCidade.Text = "";
+                        txtEndereco.Text = "";
+                        txtCelular.Text = "";
+                        txtDataNascimento.Text = "";
+                        txtEmail.Text = "";
+                        this.txtNome.Focus();
+                    }
+                    else
+                    {
+                        pessoa.Inserir(txtNome.Text,txtCidade.Text,txtEndereco.Text,txtDataNascimento.Text,txtCelular.Text,txtEmail.Text);
+                        MessageBox.Show("Cliente cadastrado com sucesso!");
+                        List<Pessoa> pessoas = pessoa.listapessoas();
+                        dgvPessoa.DataSource = pessoas;
+                        txtNome.Text = "";
+                        txtCidade.Text = "";
+                        txtEndereco.Text = "";
+                        txtCelular.Text = "";
+                        txtDataNascimento.Text = "";
+                        txtEmail.Text = "";
+                        this.txtNome.Focus();
+                    }
+                }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+        }
     }
 }
