@@ -145,5 +145,23 @@ namespace AppPessoa3
             btnAtualizar.Enabled = false;
             btnExcluir.Enabled = false;
         }
+
+        private void dgvPessoa_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dgvPessoa.Rows[e.RowIndex];
+                row.Selected = true;
+                txtId.Text = row.Cells[0].Value.ToString();
+                txtNome.Text = row.Cells[1].Value.ToString();
+                txtCidade.Text = row.Cells[2].Value.ToString();
+                txtEndereco.Text = row.Cells[3].Value.ToString();
+                txtDataNascimento.Text = row.Cells[4].Value.ToString();
+                txtCelular.Text = row.Cells[5].Value.ToString();
+                txtEmail.Text = row.Cells[6].Value.ToString();
+            }
+            btnAtualizar.Enabled = true;
+            btnExcluir.Enabled = true;
+        }
     }
 }

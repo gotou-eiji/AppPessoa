@@ -91,6 +91,7 @@
             this.dgvPessoa.ReadOnly = true;
             this.dgvPessoa.Size = new System.Drawing.Size(738, 243);
             this.dgvPessoa.TabIndex = 3;
+            this.dgvPessoa.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPessoa_CellClick);
             // 
             // btnAtualizar
             // 
