@@ -83,7 +83,7 @@ namespace AppPessoa3
             }
         }
 
-        private void btnLocalizar_Click(object sender, EventArgs e)
+        private void btnLocalizar_Click_1(object sender, EventArgs e)
         {
             if (txtId.Text == "")
             {
@@ -104,6 +104,46 @@ namespace AppPessoa3
                 btnAtualizar.Enabled = true;
                 btnExcluir.Enabled = true;
             }
+        }
+
+        private void btnAtualizar_Click(object sender, EventArgs e)
+        {
+            int Id = Convert.ToInt32(txtId.Text.Trim());
+            Pessoa pessoa = new Pessoa();
+            pessoa.Atualizar(Id, txtNome.Text, txtCidade.Text, txtEndereco.Text, txtDataNascimento.Text, txtCelular.Text, txtEmail.Text);
+            MessageBox.Show("Cliente atualizado com sucesso!");
+            List<Pessoa> pessoas = pessoa.listapessoas();
+            dgvPessoa.DataSource = pessoas;
+            txtId.Text = "";
+            txtNome.Text = "";
+            txtCidade.Text = "";
+            txtEndereco.Text = "";
+            txtCelular.Text = "";
+            txtDataNascimento.Text = "";
+            txtEmail.Text = "";
+            this.txtNome.Focus();
+            btnAtualizar.Enabled = false;
+            btnExcluir.Enabled = false;
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            int Id = Convert.ToInt32(txtId.Text.Trim());
+            Pessoa pessoa = new Pessoa();
+            pessoa.Excluir(Id);
+            MessageBox.Show("Cliente atualizado com sucesso!");
+            List<Pessoa> pessoas = pessoa.listapessoas();
+            dgvPessoa.DataSource = pessoas;
+            txtId.Text = "";
+            txtNome.Text = "";
+            txtCidade.Text = "";
+            txtEndereco.Text = "";
+            txtCelular.Text = "";
+            txtDataNascimento.Text = "";
+            txtEmail.Text = "";
+            this.txtNome.Focus();
+            btnAtualizar.Enabled = false;
+            btnExcluir.Enabled = false;
         }
     }
 }
